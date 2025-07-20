@@ -1,12 +1,3 @@
-module.exports = {
-  theme: {
-    extend: {
-      fontFamily: {
-        caveat: ['Caveat', 'cursive'],
-      },
-    },
-  },
-};
 
 const config = {
   plugins: ["@tailwindcss/postcss"],
