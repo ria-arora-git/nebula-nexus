@@ -23,9 +23,9 @@ export default function Home() {
     <main className="relative h-screen w-screen text-white font-sans overflow-x-hidden">
       <FloatingGalaxyScene />
 
-      <section className="absolute top-35 flex flex-col justify-center items-center text-center px-4 w-full ">
+      <section className="absolute top-25 flex flex-col justify-center items-center text-center px-4 w-full ">
         <motion.h1
-          className="text-6xl font-extrabold mb-4 drop-shadow-xl"
+          className="text-6xl font-extrabold mb-6 drop-shadow-xl"
           initial={{ opacity: 0, y: -50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1 }}
@@ -38,7 +38,7 @@ export default function Home() {
           animate={{ opacity: 1 }}
           transition={{ delay: 0.5, duration: 1.5 }}
         >
-          Visualize real-time data from simulated interplanetary missions.
+          Visualizing real-time data from simulated interplanetary missions.
         </motion.p>
       </section>
 
