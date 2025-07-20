@@ -1,103 +1,128 @@
-import Image from "next/image";
+"use client";
+
+
+import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
+import FloatingGalaxyScene from "./components/floating";
 
 export default function Home() {
-  return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+  const [marsTemp, setMarsTemp] = useState("-65°C");
+  const [asteroidCount, setAsteroidCount] = useState(128);
+  const [satelliteStatus, setSatelliteStatus] = useState("All Systems Nominal");
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setMarsTemp(`-${65 + Math.floor(Math.random() * 10)}°C`);
+      setAsteroidCount(120 + Math.floor(Math.random() * 10));
+    }, 5000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  return (
+    <main className="relative h-screen w-screen text-white font-sans overflow-x-hidden">
+      <FloatingGalaxyScene />
+
+      <section className="absolute top-35 flex flex-col justify-center items-center text-center px-4 w-full ">
+        <motion.h1
+          className="text-6xl font-extrabold mb-4 drop-shadow-xl"
+          initial={{ opacity: 0, y: -50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1 }}
         >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
+          Space Mission Dashboard
+        </motion.h1>
+        <motion.p
+          className="text-2xl max-w-xl"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.5, duration: 1.5 }}
         >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
+          Visualize real-time data from simulated interplanetary missions.
+        </motion.p>
+      </section>
+
+      <section className="h-screen flex flex-col items-center justify-center bg-opacity-20 px-6 text-center">
+        <motion.h2
+          className="text-4xl font-bold mb-6"
+          initial={{ opacity: 0, x: -100 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ duration: 1 }}
         >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+          🛰️ ISS Current Location
+        </motion.h2>
+        <motion.div
+          className="w-full max-w-4xl p-6 rounded-lg bg-white bg-opacity-10 backdrop-blur-md shadow-xl"
+          initial={{ scale: 0.8, opacity: 0 }}
+          whileInView={{ scale: 1, opacity: 1 }}
+          transition={{ duration: 1 }}
+        >
+          <p className="text-xl">
+            Latitude: <span className="font-bold">28.5623° N</span>, Longitude: <span className="font-bold">80.5774° W</span>
+          </p>
+          <p className="text-lg mt-2">Altitude: 408 km | Speed: 7.66 km/s</p>
+        </motion.div>
+      </section>
+
+      <section className="h-screen flex flex-col items-center justify-center px-6 text-center">
+        <motion.h2
+          className="text-4xl font-bold mb-6"
+          initial={{ opacity: 0, x: 100 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ duration: 1 }}
+        >
+          🌌 Mars Weather Report
+        </motion.h2>
+        <motion.div
+          className="w-full max-w-3xl p-6 rounded-lg bg-red-900 bg-opacity-20 backdrop-blur-md shadow-xl"
+          initial={{ scale: 0.8, opacity: 0 }}
+          whileInView={{ scale: 1, opacity: 1 }}
+          transition={{ duration: 1 }}
+        >
+          <p className="text-xl">Current Temp: <span className="font-bold">{marsTemp}</span></p>
+          <p className="text-lg mt-2">Winds: 10–20 km/h | Visibility: Clear</p>
+        </motion.div>
+      </section>
+
+      <section className="h-screen flex flex-col items-center justify-center px-6 text-center">
+        <motion.h2
+          className="text-4xl font-bold mb-6"
+          initial={{ opacity: 0, y: -50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1 }}
+        >
+          🛰️ Satellite Telemetry
+        </motion.h2>
+        <motion.div
+          className="w-full max-w-4xl p-6 rounded-lg bg-blue-800 bg-opacity-20 backdrop-blur-md shadow-xl"
+          initial={{ scale: 0.8, opacity: 0 }}
+          whileInView={{ scale: 1, opacity: 1 }}
+          transition={{ duration: 1 }}
+        >
+          <p className="text-xl">Status: <span className="font-bold">{satelliteStatus}</span></p>
+          <p className="text-lg mt-2">Battery: 87% | Signal Strength: Excellent</p>
+        </motion.div>
+      </section>
+
+      <section className="h-screen flex flex-col items-center justify-center px-6 text-center">
+        <motion.h2
+          className="text-4xl font-bold mb-6"
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1 }}
+        >
+          ☄️ Near-Earth Asteroid Watch
+        </motion.h2>
+        <motion.div
+          className="w-full max-w-3xl p-6 rounded-lg bg-yellow-700 bg-opacity-20 backdrop-blur-md shadow-xl"
+          initial={{ scale: 0.8, opacity: 0 }}
+          whileInView={{ scale: 1, opacity: 1 }}
+          transition={{ duration: 1 }}
+        >
+          <p className="text-xl">Active Trackers: <span className="font-bold">{asteroidCount}</span></p>
+          <p className="text-lg mt-2">Threat Level: Low | Nearest Pass: 0.02 AU</p>
+        </motion.div>
+      </section>
+    </main>
   );
 }
