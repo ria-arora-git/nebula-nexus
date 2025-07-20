@@ -8,7 +8,7 @@ import FloatingGalaxyScene from "./components/floating";
 export default function Home() {
   const [marsTemp, setMarsTemp] = useState("-65°C");
   const [asteroidCount, setAsteroidCount] = useState(128);
-  const [satelliteStatus, setSatelliteStatus] = useState("All Systems Nominal");
+  const [satelliteStatus] = useState("All Systems Nominal");
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -42,7 +42,7 @@ export default function Home() {
         </motion.p>
       </section>
 
-      <section className="h-screen flex flex-col items-center justify-center bg-opacity-20 px-6 text-center">
+      <section className="h-1/2 flex flex-col items-center justify-center bg-opacity-20 px-6 text-center">
         <motion.h2
           className="text-4xl font-bold mb-6"
           initial={{ opacity: 0, x: -100 }}
@@ -52,7 +52,7 @@ export default function Home() {
           🛰️ ISS Current Location
         </motion.h2>
         <motion.div
-          className="w-full max-w-4xl p-6 rounded-lg bg-white bg-opacity-10 backdrop-blur-md shadow-xl"
+          className="w-full max-w-4xl p-6 rounded-lg bg-blue-700 bg-opacity-10 backdrop-blur-md shadow-xl"
           initial={{ scale: 0.8, opacity: 0 }}
           whileInView={{ scale: 1, opacity: 1 }}
           transition={{ duration: 1 }}
@@ -64,7 +64,7 @@ export default function Home() {
         </motion.div>
       </section>
 
-      <section className="h-screen flex flex-col items-center justify-center px-6 text-center">
+      <section className="h-1/2 flex flex-col items-center justify-center px-6 text-center">
         <motion.h2
           className="text-4xl font-bold mb-6"
           initial={{ opacity: 0, x: 100 }}
@@ -84,7 +84,7 @@ export default function Home() {
         </motion.div>
       </section>
 
-      <section className="h-screen flex flex-col items-center justify-center px-6 text-center">
+      <section className="h-1/2 flex flex-col items-center justify-center px-6 text-center">
         <motion.h2
           className="text-4xl font-bold mb-6"
           initial={{ opacity: 0, y: -50 }}
@@ -104,7 +104,7 @@ export default function Home() {
         </motion.div>
       </section>
 
-      <section className="h-screen flex flex-col items-center justify-center px-6 text-center">
+      <section className="h-1/2 flex flex-col items-center justify-center px-6 text-center">
         <motion.h2
           className="text-4xl font-bold mb-6"
           initial={{ opacity: 0, y: 50 }}

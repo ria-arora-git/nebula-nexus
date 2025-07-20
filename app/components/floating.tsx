@@ -6,7 +6,7 @@ import * as THREE from 'three';
 import { useRef, useMemo } from 'react';
 
 function MilkyWayGalaxy() {
-  const galaxyRef = useRef();
+  const galaxyRef = useRef<THREE.Points>(null);
 
   const parameters = {
     count: 10000,
@@ -49,7 +49,16 @@ function MilkyWayGalaxy() {
     }
 
     return { positions, colors };
-  }, []);
+  }, [
+    parameters.count,
+    parameters.radius,
+    parameters.branches,
+    parameters.spin,
+    parameters.randomness,
+    parameters.randomnessPower,
+    parameters.insideColor,
+    parameters.outsideColor,
+  ]);
 
   useFrame(({ clock }) => {
     if (galaxyRef.current) {
@@ -62,15 +71,11 @@ function MilkyWayGalaxy() {
       <bufferGeometry>
         <bufferAttribute
           attach="attributes-position"
-          count={parameters.count}
-          array={galaxyGeometry.positions}
-          itemSize={3}
+          args={[galaxyGeometry.positions, 3]}
         />
         <bufferAttribute
           attach="attributes-color"
-          count={parameters.count}
-          array={galaxyGeometry.colors}
-          itemSize={3}
+          args={[galaxyGeometry.colors, 3]}
         />
       </bufferGeometry>
       <pointsMaterial
